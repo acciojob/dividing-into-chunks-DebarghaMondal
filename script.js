@@ -1,17 +1,27 @@
 const arr = [1, 2, 3, 4, 1, 0, 2, 2];
 
 const divide = (arr, n) => {
-  // Write your code here
-  const result = arr.reduce((resultArray, item, index) => { 
-  const chunkIndex = Math.floor(index/n)
+  // Write your code here   
+  let resultArray = [];
+  let sum = 0;
+  let tempArray = [];
 
-  if(!resultArray[chunkIndex]) {
-    resultArray[chunkIndex] = [] // start a new chunk
+  arr.forEach((item) => {
+    if (sum + item > n) {
+      resultArray.push(tempArray);
+      sum = item;
+      tempArray = [item];
+    } else {
+      sum += item;
+      tempArray.push(item);
+    }
+  });
+
+  if (tempArray.length !== 0) {
+    resultArray.push(tempArray);
   }
 
-  resultArray[chunkIndex].push(item)
-
-  return resultArray
+  return resultArray;
 };
 
 const n = prompt("Enter n: ");
